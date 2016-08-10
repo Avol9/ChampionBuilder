@@ -1,0 +1,40 @@
+/*This is the style sheet for the home page*/
+
+body {
+	background-color: #0d0d0d;
+}
+
+header {
+	text-align: center;
+}
+
+header:hover {
+	opacity: 0.8;
+}
+
+table, tr, td {
+	border-spacing: 0px;
+	padding: 0px;
+	border-collapse: collapse;
+}
+tr {
+	font-size: 0;
+}
+table {
+	width: 100%;
+}
+td {
+	width: 0.625%;	
+}		
+#champIcon {
+	width: 100%;
+}
+		
+#champIcon:hover {
+	opacity: 0.2;
+}
+		
+footer {
+	text-align: center;
+	color: #d6d7d2; 
+}
