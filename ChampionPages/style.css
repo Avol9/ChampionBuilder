@@ -1,0 +1,51 @@
+body {
+	background-size: 100%;
+	color:#d6d7d2;
+	padding: 35px 5px;
+}
+
+table {
+	background-color: #d6d7d2;
+	color: #0d0d0d;
+	border: 2px solid #0d0d0d;
+    border-collapse: collapse;
+	padding: 0px;
+	font-size: 14px;		
+}
+
+tr {				
+	border: 1px solid #0d0d0d;
+}
+
+td.stat {
+	width:35%;
+}
+			
+td.value {
+	width:15%;
+}
+
+footer {
+	text-align: center;
+	background: #0d0d0d;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;	
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+	background: #0d0d0d;
+	width: 100%;
+	margin-top: 0;
+	position: absolute;
+	top: 0;
+    left: 0;
+    right: 0;
+}
+
+header:hover {
+	opacity: 0.8;
+}
