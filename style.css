@@ -17,21 +17,29 @@ table, tr, td {
 	padding: 0px;
 	border-collapse: collapse;
 }
+
 tr {
 	font-size: 0;
 }
+
 table {
 	width: 100%;
 }
+
 td {
 	width: 0.625%;	
-}		
+}
+
 #champIcon {
 	width: 100%;
 }
 		
 #champIcon:hover {
 	opacity: 0.2;
+}
+
+#champIcon:active{
+	opacity: 0;
 }
 		
 footer {
