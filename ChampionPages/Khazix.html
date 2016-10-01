@@ -15,7 +15,7 @@
 
 <body>
     <header>
-        <a href="C:\Users\student\OneDrive\Documents\Purdue University\Summer 2016\ChampionBuilder\index.html"><img src="MiniLogo.png"></a>
+        <a href="..\index.html"><img src="MiniLogo.png"></a>
     </header>
     <div data-ng-app="khazixJson" data-ng-controller="khazixCtrl" data-ng-init="model.range = 1">
         <table class="statTable">
@@ -58,7 +58,7 @@
             </tr>
             <tr>
                 <td class="stat">Movement Speed:</td>
-                <td class="value">{{myData.movespeed| number}}</td>
+                <td class="value">{{myData.movespeed + stats.movementSpeed| number}}</td>
                 <td class="stat">Armor Pen (Percent):</td>
                 <td class="value">{{0| number}}</td>
             </tr>
@@ -135,7 +135,7 @@
                         <img src="http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/3102.png" alt="Banshee's Veil" id="itemIcon">
                     </td>
                     <td class="itemTable">
-                        <img src="http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/3006.png" alt="Berserker's Greaves" id="itemIcon">
+                        <img src="http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/3006.png" alt="Berserker's Greaves" id="itemIcon" data-ng-click="addItem(3006)">
                     </td>
                     <td class="itemTable">
                         <img src="http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/3144.png" alt="Bilgewater Cutlass" id="itemIcon">
