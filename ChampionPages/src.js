@@ -26,12 +26,22 @@ khazixRead.controller("khazixCtrl", function($scope, $http) {
                 isMelee: true,
                 health: 0,
                 healthRegen: 0,
-                attackDamage: 0,
-                abilityPower: 0,
-                attackSpeed: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
                 magicResist: 0,
                 movementSpeed: 0,
-                cdr: 0
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
             }
             var itemBuild = [-1, -1, -1, -1, -1, -1];
 
@@ -72,16 +82,35 @@ khazixRead.controller("khazixCtrl", function($scope, $http) {
                 //Nullifies all the stats
                 $scope.stats.health = 0;
                 $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
                 $scope.stats.attackDamage = 0;
                 $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
                 $scope.stats.abilityPower = 0;
-                $scope.stats.magicResist = 0;
-                $scope.stats.cdr = 0;
-                $scope.stats.movementSpeed = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
 
                 //Cycles through the loop
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
                             $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
                         }
@@ -90,16 +119,82 @@ khazixRead.controller("khazixCtrl", function($scope, $http) {
                             $scope.stats.healthRegen += $scope.itemData[itemBuild[i]].stats.FlatHPRegenPoolMod;
                         }
 
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPRegenMod != null) {
+                            $scope.stats.manaRegen += $scope.itemData[itemBuild[i]].stats.FlatMPRegenMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
                         if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
                             $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
                         }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        //Figure out what to do with tenacity. Probably cry
+
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        //Figure out what to do with flatArmorPen. Probably cry
+
+                        //Figure out what to do with percentArmorPen. Probably cry
+
+                        //Figure out what to do with flatMagicPen. Probably cry
+
+                        //Figure out what to do with percentMagicPen. Probably cry
                     }
                 }
                 console.log(itemBuild);
-                console.log("updateStats() works");
             }
-
-            console.log($scope.itemData[3089].stats);
         });
     });
 });
