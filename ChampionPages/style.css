@@ -1,92 +1,110 @@
 /*This is the style sheet for the Champion pages*/
 
 body {
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-color: #0d0d0d;
-	color:#d6d7d2;
-	padding: 35px 5px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #0d0d0d;
+    color: #d6d7d2;
+    padding: 35px 5px;
+    font-family: "Arial", sans-serif;
 }
 
 table.statTable {
-	background-color: #d6d7d2;
-	color: #0d0d0d;
-	border: 2px solid #0d0d0d;
+    background-color: #d6d7d2;
+    color: #0d0d0d;
+    border: 2px solid #0d0d0d;
     border-collapse: collapse;
-	padding: 0px;
-	font-size: 14px;		
-	width: 40%;
+    padding: 0px;
+    font-size: 14px;
+    width: 40%;
 }
 
 table.build {
-	background-color: #d6d7d2;
-	border: 2px solid #0d0d0d;
-	border-collapse: collapse;
+    background-color: #d6d7d2;
+    border: 2px solid #0d0d0d;
+    border-collapse: collapse;
 }
 
 td.build {
-	border: 2px solid #0d0d0d;
-	width: 56px;
-	height: 56px;
+    border: 2px solid #0d0d0d;
+    width: 56px;
+    height: 56px;
+    border-spacing: 0px;
+    padding: 0px;
+    font-size: 0px;
 }
 
-tr {				
-	border: 1px solid #0d0d0d;
+tr {
+    border: 1px solid #0d0d0d;
 }
 
 td.stat {
-	width:35%;
+    width: 35%;
 }
-			
+
 td.value {
-	width:15%;
+    width: 15%;
 }
 
 footer {
-	text-align: center;
-	background: #0d0d0d;
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	left: 0;	
-	background-repeat: no-repeat;
+    text-align: center;
+    background: #0d0d0d;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
 header {
-	background: #0d0d0d;
-	width: 100%;
-	margin-top: 0;
-	position: absolute;
-	top: 0;
+    background: #0d0d0d;
+    width: 100%;
+    margin-top: 0;
+    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
-	text-align: center;
+    text-align: center;
 }
 
-a:hover{
-	opacity: 0.8;
+a:hover {
+    opacity: 0.8;
 }
 
 table.itemTable {
-	background-color: #0d0d0d;
+    background-color: #0d0d0d;
 }
 
 td.itemTable {
-	width: 0.03125%;
-	border-spacing: 0px;
-	padding: 0px;
-	font-size: 0px;	
-}		
-
-#itemIcon{
-	width: 100%;
+    width: 0.03125%;
+    border-spacing: 0px;
+    padding: 0px;
+    font-size: 0px;
 }
 
-#itemIcon:hover{
-	opacity: 0.4;
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: black;
 }
 
-#itemIcon:active{
-	opacity: 0;
+input[type=range]::-webkit-slider-thumb {
+    margin-top: -8.5px;
+}
+
+#lvl {
+    height: 30px;
+}
+
+#itemIcon {
+    width: 100%;
+}
+
+#itemIcon:hover {
+    opacity: 0.4;
+}
+
+#itemIcon:active {
+    opacity: 0;
 }
