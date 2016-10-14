@@ -19518,6 +19518,3910 @@ pantheonRead.controller("pantheonCtrl", function($scope, $http) {
     });
 });
 
+var poppyRead = angular.module("poppyJson", []);
+poppyRead.controller("poppyCtrl", function($scope, $http) {
+    $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/78?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var quinnRead = angular.module("quinnJson", []);
+quinnRead.controller("quinnCtrl", function($scope, $http) {
+    $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/133?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var rammusRead = angular.module("rammusJson", []);
+rammusRead.controller("rammusCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/33?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var reksaiRead = angular.module("reksaiJson", []);
+reksaiRead.controller("reksaiCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/421?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var renektonRead = angular.module("renektonJson", []);
+renektonRead.controller("renektonCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/58?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var rengarRead = angular.module("rengarJson", []);
+rengarRead.controller("rengarCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/107?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var rivenRead = angular.module("rivenJson", []);
+rivenRead.controller("rivenCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/92?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var rumbleRead = angular.module("rumbleJson", []);
+rumbleRead.controller("rumbleCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/68?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var ryzeRead = angular.module("ryzeJson", []);
+ryzeRead.controller("ryzeCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/13?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var sejuaniRead = angular.module("sejuaniJson", []);
+sejuaniRead.controller("sejuaniCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/113?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var shacoRead = angular.module("shacoJson", []);
+shacoRead.controller("shacoCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/35?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var shenRead = angular.module("shenJson", []);
+shenRead.controller("shenCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/98?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var shyvanaRead = angular.module("shyvanaJson", []);
+shyvanaRead.controller("shyvanaCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/102?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var singedRead = angular.module("singedJson", []);
+singedRead.controller("singedCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/27?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var sionRead = angular.module("sionJson", []);
+sionRead.controller("sionCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/14?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
+var sivirRead = angular.module("sivirJson", []);
+sivirRead.controller("sivirCtrl", function($scope, $http) {
+      $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/15?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
+        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+            $scope.info = response;
+            $scope.myData = response.data.stats;
+            $scope.itemData = responseItem.data.data;
+            $scope.stats = {
+                isMelee: true,
+                health: 0,
+                healthRegen: 0,
+                mana: 0,
+                manaRegen: 0,
+                armor: 0,
+                magicResist: 0,
+                movementSpeed: 0,
+                cdr: 0,
+                tenacity: 0,
+                attackDamage: 0,
+                attackSpeed: 0,
+                critChance: 0,
+                abilityPower: 0,
+                lifeSteal: 0,
+                flatArmorPen: 0,
+                percentArmorPen: 0,
+                flatMagicPen: 0,
+                percentMagicPen: 0
+            }
+            var itemBuild = [-1, -1, -1, -1, -1, -1];
+
+            $scope.checkItem = function(id) {
+                if (id == 3077 || id == 3074 || id == 3748) {
+                    if (!$scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                if (id == 3085) {
+                    if ($scope.stats.isMelee) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $scope.addItem = function(id) {
+                if ($scope.checkItem(id)) {
+                    console.log("addItem() works");
+                    for (var i = 0; i < itemBuild.length; i++) {
+                        if (itemBuild[i] == -1) {
+                            itemBuild[i] = id;
+                            $scope.updateStats();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $scope.removeItem = function(id) {
+                itemBuild[id] = -1;
+                $scope.updateStats();
+            }
+
+            //This method updates the stats based on the item array
+            $scope.updateStats = function() {
+                //Nullifies all the stats
+                $scope.stats.health = 0;
+                $scope.stats.healthRegen = 0;
+                $scope.stats.mana = 0;
+                $scope.stats.manaRegen = 0;
+                $scope.stats.armor = 0;
+                $scope.stats.magicResist = 0;
+                $scope.stats.movementSpeed = 0;
+                $scope.stats.cdr = 0;
+                $scope.stats.tenacity = 0;
+                $scope.stats.attackDamage = 0;
+                $scope.stats.attackSpeed = 0;
+                $scope.stats.critChance = 0;
+                $scope.stats.abilityPower = 0;
+                $scope.stats.lifeSteal = 0;
+                $scope.stats.flatArmorPen = 0;
+                $scope.stats.percentArmorPen = 0;
+                $scope.stats.flatMagicPen = 0;
+                $scope.stats.percentMagicPen = 0;
+
+                for (var i = 0; i < itemBuild.length; i++) {
+                    var thing = "build" + i;
+                    document.getElementById(thing).src = "";
+                }
+
+                //Cycles through the loop
+                for (var i = 0; i < itemBuild.length; i++) {
+                    if (itemBuild[i] != -1) {
+                        var thing = "build" + i;
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        document.getElementById(thing).src = itemImage;
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
+                            $scope.stats.health += $scope.itemData[itemBuild[i]].stats.FlatHPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3096) {
+                            $scope.stats.healthRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 1006 || itemBuild[i] == 3077 || itemBuild[i] == 3302 || itemBuild[i] == 3801) {
+                            $scope.stats.healthRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3401 || itemBuild[i] == 2303 || itemBuild[i] == 3102 || itemBuild[i] == 3190 || itemBuild[i] == 3060 || itemBuild[i] == 3105 || itemBuild[i] == 3074 || itemBuild[i] == 3748 || itemBuild[i] == 3800) {
+                            $scope.stats.healthRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3512 || itemBuild[i] == 2043) {
+                            $scope.stats.healthRegen += 1.25;
+                        }
+
+                        if (itemBuild[i] == 2302 || itemBuild[i] == 3056 || itemBuild[i] == 3069) {
+                            $scope.stats.healthRegen += 1.5;
+                        }
+
+                        if (itemBuild[i] == 3083 || itemBuild[i] == 3065) {
+                            $scope.stats.healthRegen += 2;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMPPoolMod != null) {
+                            $scope.stats.mana += $scope.itemData[itemBuild[i]].stats.FlatMPPoolMod;
+                        }
+
+                        if (itemBuild[i] == 3301 || itemBuild[i] == 1004 || itemBuild[i] == 3303) {
+                            $scope.stats.manaRegen += 0.25;
+                        }
+
+                        if (itemBuild[i] == 3114 || itemBuild[i] == 3504 || itemBuild[i] == 1056 || itemBuild[i] == 3028) {
+                            $scope.stats.manaRegen += 0.5;
+                        }
+
+                        if (itemBuild[i] == 3092 || itemBuild[i] == 3098 || itemBuild[i] == 3174 || itemBuild[i] == 3096 || itemBuild[i] == 3069) {
+                            $scope.stats.manaRegen += 0.75;
+                        }
+
+                        if (itemBuild[i] == 2301 || itemBuild[i] == 2302) {
+                            $scope.stats.manaRegen += 1;
+                        }
+
+                        if (itemBuild[i] == 3222) {
+                            $scope.stats.manaRegen += 1.5;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatArmorMod != null) {
+                            $scope.stats.armor += $scope.itemData[itemBuild[i]].stats.FlatArmorMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod != null) {
+                            $scope.stats.magicResist += $scope.itemData[itemBuild[i]].stats.FlatSpellBlockMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod != null) {
+                            $scope.stats.movementSpeed += $scope.itemData[itemBuild[i]].stats.FlatMovementSpeedMod;
+                        }
+
+                        //5% cdr
+                        if (itemBuild[i] == 3301) {
+                            $scope.stats.cdr += 5;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3504 || itemBuild[i] == 3060 || itemBuild[i] == 3133 || itemBuild[i] == 3812 || itemBuild[i] == 3508 || itemBuild[i] == 3108 || itemBuild[i] == 3069 || itemBuild[i] == 3401 || itemBuild[i] == 3157 || itemBuild[i] == 3050 || itemBuild[i] == 3024 || itemBuild[i] == 3065 || itemBuild[i] == 3096 || itemBuild[i] == 3067 || itemBuild[i] == 3100 || itemBuild[i] == 3190 || itemBuild[i] == 3001 || itemBuild[i] == 3092 || itemBuild[i] == 1412 || itemBuild[i] == 1400 || itemBuild[i] == 1408 || itemBuild[i] == 2301 || itemBuild[i] == 3222 || itemBuild[i] == 3083 || itemBuild[i] == 3114 || itemBuild[i] == 3101 || itemBuild[i] == 3158 || itemBuild[i] == 3142 || itemBuild[i] == 2302 || itemBuild[i] == 3057 || itemBuild[i] == 3056 || itemBuild[i] == 3152) {
+                            $scope.stats.cdr += 10;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3165 || itemBuild[i] == 3115 || itemBuild[i] == 3071 || itemBuild[i] == 3078 || itemBuild[i] == 3025 || itemBuild[i] == 3110 || itemBuild[i] == 3174) {
+                            $scope.stats.cdr += 20;
+                            if ($scope.stats.cdr > 40) {
+                                $scope.stats.cdr = 40;
+                            }
+                        }
+
+                        if (itemBuild[i] == 3111) {
+                            $scope.stats.tenacity += 30;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod != null) {
+                            $scope.stats.attackDamage += $scope.itemData[itemBuild[i]].stats.FlatPhysicalDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod != null) {
+                            $scope.stats.attackSpeed += $scope.itemData[itemBuild[i]].stats.PercentAttackSpeedMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatCritChanceMod != null) {
+                            $scope.stats.critChance += $scope.itemData[itemBuild[i]].stats.FlatCritChanceMod;
+                            if ($scope.stats.critChance >= 1) {
+                                $scope.stats.critChance = 1;
+                            }
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod != null) {
+                            $scope.stats.abilityPower += $scope.itemData[itemBuild[i]].stats.FlatMagicDamageMod;
+                        }
+
+                        if ($scope.itemData[itemBuild[i]].stats.PercentLifeStealMod != null) {
+                            $scope.stats.lifeSteal += $scope.itemData[itemBuild[i]].stats.PercentLifeStealMod;
+                        }
+
+                        if (itemBuild[i] == 3072) {
+                            $scope.stats.lifeSteal += 0.2;
+                        }
+
+                        if (itemBuild[i] == 3147 || itemBuild[i] == 3156 || itemBuild[i] == 3134) {
+                            $scope.stats.flatArmorPen += 10;
+                        }
+
+                        if (itemBuild[i] == 3142) {
+                            $scope.stats.flatArmorPen += 20;
+                        }
+
+                        if (itemBuild[i] == 3033 || itemBuild[i] == 3036) {
+                            $scope.stats.percentArmorPen += 45;
+                        }
+
+                        if (itemBuild[i] == 3035) {
+                            $scope.stats.percentArmorPen += 35;
+                        }
+
+                        if (itemBuild[i] == 3151 || itemBuild[i] == 3020 || itemBuild[i] == 3136) {
+                            $scope.stats.flatMagicPen += 15;
+                        }
+
+                        if (itemBuild[i] == 3135) {
+                            $scope.stats.percentMagicPen += 35;
+                        }
+                    }
+                }
+                console.log(itemBuild);
+            }
+        });
+    });
+});
+
 var yasuoRead = angular.module("yasuoJson", []);
 yasuoRead.controller("yasuoCtrl", function($scope, $http) {
     $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/157?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
