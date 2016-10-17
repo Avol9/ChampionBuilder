@@ -41,7 +41,7 @@
                 <td class="stat">Mana Regen:</td>
                 <td class="value">{{(myData.mpregen + myData.mpregenperlevel*(model.range - 1)) * (1 + stats.manaRegen)| number}}</td>
                 <td class="stat">Ability Power:</td>
-                <td class="value">{{stats.abilityPower| number}}</td>
+                <td class="value">{{stats.abilityPower + 0.5 * (myData.spellblock + myData.spellblockperlevel*(model.range - 1) + stats.magicResist)| number}}</td>
             </tr>
             <tr>
                 <td class="stat">Armor:</td>

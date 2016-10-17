@@ -250,7 +250,7 @@ ahriRead.controller("ahriCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -1226,7 +1226,7 @@ aniviaRead.controller("aniviaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -1470,7 +1470,7 @@ annieRead.controller("annieCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -1714,7 +1714,7 @@ asheRead.controller("asheCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -1958,7 +1958,7 @@ aurelionSolRead.controller("aurelionSolCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -2202,7 +2202,7 @@ azirRead.controller("azirCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -2446,7 +2446,7 @@ bardRead.controller("bardCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -2934,7 +2934,7 @@ brandRead.controller("brandCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -3422,7 +3422,7 @@ caitlynRead.controller("caitlynCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -3666,7 +3666,7 @@ cassiopeiaRead.controller("cassiopeiaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -4154,7 +4154,7 @@ corkiRead.controller("corkiCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -5130,7 +5130,7 @@ dravenRead.controller("dravenCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -6106,7 +6106,7 @@ ezrealRead.controller("ezrealCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -6350,7 +6350,7 @@ fiddlesticksRead.controller("fiddlesticksCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -7814,7 +7814,7 @@ gnarRead.controller("gnarCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -8302,7 +8302,7 @@ gravesRead.controller("gravesCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -8790,7 +8790,7 @@ heimerdingerRead.controller("heimerdingerCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -9766,7 +9766,7 @@ jannaRead.controller("jannaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -10742,7 +10742,7 @@ jhinRead.controller("jhinCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -10986,7 +10986,7 @@ jinxRead.controller("jinxCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -11230,7 +11230,7 @@ kalistaRead.controller("kalistaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -11474,7 +11474,7 @@ karmaRead.controller("karmaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -11718,7 +11718,7 @@ karthusRead.controller("karthusCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -12450,7 +12450,7 @@ kayleRead.controller("kayleCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -12694,7 +12694,7 @@ kennenRead.controller("kennenCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -13182,7 +13182,7 @@ kindredRead.controller("kindredCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -13670,7 +13670,7 @@ kogmawRead.controller("kogmawCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -13914,7 +13914,7 @@ leblancRead.controller("leblancCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -14646,7 +14646,7 @@ lissandraRead.controller("lissandraCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -14890,7 +14890,7 @@ lucianRead.controller("lucianCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -15134,7 +15134,7 @@ luluRead.controller("luluCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -15378,7 +15378,7 @@ luxRead.controller("luxCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -15866,7 +15866,7 @@ malzaharRead.controller("malzaharCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -16598,7 +16598,7 @@ missFortuneRead.controller("missFortuneCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -17086,7 +17086,7 @@ morganaRead.controller("morganaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -17330,7 +17330,7 @@ namiRead.controller("namiCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -19038,7 +19038,7 @@ oriannaRead.controller("oriannaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -21478,7 +21478,7 @@ ryzeRead.controller("ryzeCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -23186,7 +23186,7 @@ sivirRead.controller("sivirCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -23674,7 +23674,7 @@ sonaRead.controller("sonaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -23918,7 +23918,7 @@ sorakaRead.controller("sorakaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -24162,7 +24162,7 @@ swainRead.controller("swainCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -24406,7 +24406,7 @@ syndraRead.controller("syndraCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -24894,7 +24894,7 @@ taliyahRead.controller("taliyahCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -25626,7 +25626,7 @@ teemoRead.controller("teemoCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -25870,7 +25870,7 @@ threshRead.controller("threshCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -26114,7 +26114,7 @@ tristanaRead.controller("tristanaCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -26846,7 +26846,7 @@ twistedFateRead.controller("twistedFateCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -27090,7 +27090,7 @@ twitchRead.controller("twitchCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -27578,7 +27578,7 @@ urgotRead.controller("urgotCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -27822,7 +27822,7 @@ varusRead.controller("varusCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -28066,7 +28066,7 @@ vayneRead.controller("vayneCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -28310,7 +28310,7 @@ veigarRead.controller("veigarCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -28554,7 +28554,7 @@ velkozRead.controller("velkozCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -29042,7 +29042,7 @@ viktorRead.controller("viktorCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -29286,7 +29286,7 @@ vladimirRead.controller("vladimirCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -30262,7 +30262,7 @@ xerathRead.controller("xerathCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -31726,7 +31726,7 @@ ziggsRead.controller("ziggsCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -31970,7 +31970,7 @@ zileanRead.controller("zileanCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,
@@ -32214,7 +32214,7 @@ zyraRead.controller("zyraCtrl", function($scope, $http) {
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
-                isMelee: true,
+                isMelee: false,
                 health: 0,
                 healthRegen: 0,
                 mana: 0,

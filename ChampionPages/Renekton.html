@@ -33,13 +33,13 @@
             </tr>
             <tr>
                 <td class="stat">Mana:</td>
-                <td class="value">{{myData.mp + myData.mpperlevel*(model.range - 1) + stats.mana| number}}</td>
+                <td class="value">{{myData.mp + myData.mpperlevel*(model.range - 1)| number}}</td>
                 <td class="stat">Crit Chance:</td>
                 <td class="value">{{(myData.crit + stats.critChance)*100| number}}%</td>
             </tr>
             <tr>
                 <td class="stat">Mana Regen:</td>
-                <td class="value">{{(myData.mpregen + myData.mpregenperlevel*(model.range - 1)) * (1 + stats.manaRegen)| number}}</td>
+                <td class="value">{{(myData.mpregen + myData.mpregenperlevel*(model.range - 1))| number}}</td>
                 <td class="stat">Ability Power:</td>
                 <td class="value">{{stats.abilityPower| number}}</td>
             </tr>

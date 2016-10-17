@@ -23,7 +23,7 @@
                 <td class="stat">Health: </td>
                 <td class="value">{{myData.hp + myData.hpperlevel*(model.range - 1) + stats.health| number}}</td>
                 <td class="stat">Attack Damage:</td>
-                <td class="value">{{myData.attackdamage + myData.attackdamageperlevel*(model.range - 1) + stats.attackDamage| number}}</td>
+                <td class="value">{{myData.attackdamage + myData.attackdamageperlevel*(model.range - 1) + stats.attackDamage + 0.25*(myData.armor + myData.armorperlevel*(model.range - 1) + stats.armor)| number}}</td>
             </tr>
             <tr>
                 <td class="stat">Health Regen:</td>
