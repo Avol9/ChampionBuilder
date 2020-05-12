@@ -1,7 +1,7 @@
 var aatroxRead = angular.module("aatroxJson", []);
 aatroxRead.controller("aatroxCtrl", function($scope, $http) {
-    $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/266?champData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(response) {
-        $http.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=stats&api_key=ba5c1405-42bb-4e90-bfc7-ee33f98df4bf").then(function(responseItem) {
+    $http.get("https://ddragon.leagueoflegends.com/cdn/10.9.1/data/en_US/champion/Aatrox.json").then(function(response) {
+        $http.get("https://ddragon.leagueoflegends.com/cdn/10.9.1/data/en_US/item.json").then(function(responseItem) {
             $scope.info = response;
             $scope.myData = response.data.stats;
             $scope.itemData = responseItem.data.data;
@@ -91,7 +91,7 @@ aatroxRead.controller("aatroxCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -335,7 +335,7 @@ ahriRead.controller("ahriCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -579,7 +579,7 @@ akaliRead.controller("akaliCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -823,7 +823,7 @@ alistarRead.controller("alistarCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -1067,7 +1067,7 @@ amumuRead.controller("amumuCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -1311,7 +1311,7 @@ aniviaRead.controller("aniviaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -1555,7 +1555,7 @@ annieRead.controller("annieCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -1799,7 +1799,7 @@ asheRead.controller("asheCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -2043,7 +2043,7 @@ aurelionSolRead.controller("aurelionSolCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -2287,7 +2287,7 @@ azirRead.controller("azirCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -2531,7 +2531,7 @@ bardRead.controller("bardCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -2775,7 +2775,7 @@ blitzcrankRead.controller("blitzcrankCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -3019,7 +3019,7 @@ brandRead.controller("brandCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -3263,7 +3263,7 @@ braumRead.controller("braumCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -3507,7 +3507,7 @@ caitlynRead.controller("caitlynCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -3751,7 +3751,7 @@ cassiopeiaRead.controller("cassiopeiaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -3995,7 +3995,7 @@ chogathRead.controller("chogathCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -4239,7 +4239,7 @@ corkiRead.controller("corkiCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -4483,7 +4483,7 @@ dariusRead.controller("dariusCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -4727,7 +4727,7 @@ dianaRead.controller("dianaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -4971,7 +4971,7 @@ drMundoRead.controller("drMundoCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -5215,7 +5215,7 @@ dravenRead.controller("dravenCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -5459,7 +5459,7 @@ ekkoRead.controller("ekkoCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -5703,7 +5703,7 @@ eliseRead.controller("eliseCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -5947,7 +5947,7 @@ evelynnRead.controller("evelynnCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -6191,7 +6191,7 @@ ezrealRead.controller("ezrealCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -6435,7 +6435,7 @@ fiddlesticksRead.controller("fiddlesticksCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -6679,7 +6679,7 @@ fioraRead.controller("fioraCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -6923,7 +6923,7 @@ fizzRead.controller("fizzCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -7167,7 +7167,7 @@ galioRead.controller("galioCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -7411,7 +7411,7 @@ gangplankRead.controller("gangplankCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -7655,7 +7655,7 @@ garenRead.controller("garenCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -7899,7 +7899,7 @@ gnarRead.controller("gnarCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -8143,7 +8143,7 @@ gragasRead.controller("gragasCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -8387,7 +8387,7 @@ gravesRead.controller("gravesCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -8631,7 +8631,7 @@ hecarimRead.controller("hecarimCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -8875,7 +8875,7 @@ heimerdingerRead.controller("heimerdingerCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -9119,7 +9119,7 @@ illaoiRead.controller("illaoiCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -9363,7 +9363,7 @@ ireliaRead.controller("ireliaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -9607,7 +9607,7 @@ ivernRead.controller("ivernCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -9851,7 +9851,7 @@ jannaRead.controller("jannaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -10095,7 +10095,7 @@ jarvanIVRead.controller("jarvanIVCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -10339,7 +10339,7 @@ jaxRead.controller("jaxCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -10583,7 +10583,7 @@ jayceRead.controller("jayceCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -10827,7 +10827,7 @@ jhinRead.controller("jhinCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -11071,7 +11071,7 @@ jinxRead.controller("jinxCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -11315,7 +11315,7 @@ kalistaRead.controller("kalistaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -11559,7 +11559,7 @@ karmaRead.controller("karmaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -11803,7 +11803,7 @@ karthusRead.controller("karthusCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -12047,7 +12047,7 @@ kassadinRead.controller("kassadinCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -12291,7 +12291,7 @@ katarinaRead.controller("katarinaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -12535,7 +12535,7 @@ kayleRead.controller("kayleCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -12779,7 +12779,7 @@ kennenRead.controller("kennenCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -13023,7 +13023,7 @@ khazixRead.controller("khazixCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -13267,7 +13267,7 @@ kindredRead.controller("kindredCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -13511,7 +13511,7 @@ kledRead.controller("kledCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -13755,7 +13755,7 @@ kogmawRead.controller("kogmawCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -13999,7 +13999,7 @@ leblancRead.controller("leblancCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -14243,7 +14243,7 @@ leeSinRead.controller("leeSinCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -14487,7 +14487,7 @@ leonaRead.controller("leonaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -14731,7 +14731,7 @@ lissandraRead.controller("lissandraCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -14975,7 +14975,7 @@ lucianRead.controller("lucianCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -15219,7 +15219,7 @@ luluRead.controller("luluCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -15463,7 +15463,7 @@ luxRead.controller("luxCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -15707,7 +15707,7 @@ malphiteRead.controller("malphiteCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -15951,7 +15951,7 @@ malzaharRead.controller("malzaharCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -16195,7 +16195,7 @@ maokaiRead.controller("maokaiCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -16439,7 +16439,7 @@ masterYiRead.controller("masterYiCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -16683,7 +16683,7 @@ missFortuneRead.controller("missFortuneCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -16927,7 +16927,7 @@ mordekaiserRead.controller("mordekaiserCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -17171,7 +17171,7 @@ morganaRead.controller("morganaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -17415,7 +17415,7 @@ namiRead.controller("namiCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -17659,7 +17659,7 @@ nasusRead.controller("nasusCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -17903,7 +17903,7 @@ nautilusRead.controller("nautilusCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -18147,7 +18147,7 @@ nidaleeRead.controller("nidaleeCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -18391,7 +18391,7 @@ nocturneRead.controller("nocturneCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -18635,7 +18635,7 @@ nunuRead.controller("nunuCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -18879,7 +18879,7 @@ olafRead.controller("olafCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -19123,7 +19123,7 @@ oriannaRead.controller("oriannaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -19367,7 +19367,7 @@ pantheonRead.controller("pantheonCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -19611,7 +19611,7 @@ poppyRead.controller("poppyCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -19855,7 +19855,7 @@ quinnRead.controller("quinnCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -20099,7 +20099,7 @@ rammusRead.controller("rammusCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -20343,7 +20343,7 @@ reksaiRead.controller("reksaiCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -20587,7 +20587,7 @@ renektonRead.controller("renektonCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -20831,7 +20831,7 @@ rengarRead.controller("rengarCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -21075,7 +21075,7 @@ rivenRead.controller("rivenCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -21319,7 +21319,7 @@ rumbleRead.controller("rumbleCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -21563,7 +21563,7 @@ ryzeRead.controller("ryzeCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -21807,7 +21807,7 @@ sejuaniRead.controller("sejuaniCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -22051,7 +22051,7 @@ shacoRead.controller("shacoCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -22295,7 +22295,7 @@ shenRead.controller("shenCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -22539,7 +22539,7 @@ shyvanaRead.controller("shyvanaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -22783,7 +22783,7 @@ singedRead.controller("singedCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -23027,7 +23027,7 @@ sionRead.controller("sionCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -23271,7 +23271,7 @@ sivirRead.controller("sivirCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -23515,7 +23515,7 @@ skarnerRead.controller("skarnerCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -23759,7 +23759,7 @@ sonaRead.controller("sonaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -24003,7 +24003,7 @@ sorakaRead.controller("sorakaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -24247,7 +24247,7 @@ swainRead.controller("swainCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -24491,7 +24491,7 @@ syndraRead.controller("syndraCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -24735,7 +24735,7 @@ tahmkenchRead.controller("tahmkenchCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -24979,7 +24979,7 @@ taliyahRead.controller("taliyahCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -25223,7 +25223,7 @@ talonRead.controller("talonCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -25467,7 +25467,7 @@ taricRead.controller("taricCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -25711,7 +25711,7 @@ teemoRead.controller("teemoCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -25955,7 +25955,7 @@ threshRead.controller("threshCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -26199,7 +26199,7 @@ tristanaRead.controller("tristanaCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -26443,7 +26443,7 @@ trundleRead.controller("trundleCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -26687,7 +26687,7 @@ tryndamereRead.controller("tryndamereCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -26931,7 +26931,7 @@ twistedFateRead.controller("twistedFateCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -27175,7 +27175,7 @@ twitchRead.controller("twitchCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -27419,7 +27419,7 @@ udyrRead.controller("udyrCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -27663,7 +27663,7 @@ urgotRead.controller("urgotCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -27907,7 +27907,7 @@ varusRead.controller("varusCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -28151,7 +28151,7 @@ vayneRead.controller("vayneCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -28395,7 +28395,7 @@ veigarRead.controller("veigarCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -28639,7 +28639,7 @@ velkozRead.controller("velkozCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -28883,7 +28883,7 @@ viRead.controller("viCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -29127,7 +29127,7 @@ viktorRead.controller("viktorCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -29371,7 +29371,7 @@ vladimirRead.controller("vladimirCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -29615,7 +29615,7 @@ volibearRead.controller("volibearCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -29859,7 +29859,7 @@ warwickRead.controller("warwickCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -30103,7 +30103,7 @@ wukongRead.controller("wukongCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -30347,7 +30347,7 @@ xerathRead.controller("xerathCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -30591,7 +30591,7 @@ xinZhaoRead.controller("xinZhaoCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -30835,7 +30835,7 @@ yasuoRead.controller("yasuoCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -31079,7 +31079,7 @@ yorickRead.controller("yorickCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -31323,7 +31323,7 @@ zacRead.controller("zacCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -31567,7 +31567,7 @@ zedRead.controller("zedCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -31811,7 +31811,7 @@ ziggsRead.controller("ziggsCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -32055,7 +32055,7 @@ zileanRead.controller("zileanCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
@@ -32299,7 +32299,7 @@ zyraRead.controller("zyraCtrl", function($scope, $http) {
                 for (var i = 0; i < itemBuild.length; i++) {
                     if (itemBuild[i] != -1) {
                         var thing = "build" + i;
-                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/item/" + itemBuild[i] + ".png"
+                        var itemImage = "http://ddragon.leagueoflegends.com/cdn/10.9.1/img/item/" + itemBuild[i] + ".png"
                         document.getElementById(thing).src = itemImage;
 
                         if ($scope.itemData[itemBuild[i]].stats.FlatHPPoolMod != null) {
