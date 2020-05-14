@@ -1,9 +1,24 @@
+function removeItem(itemBuild, id) {
+    itemBuild[id] = -1;
+    copy = [];
+    for (x of itemBuild) {
+        if (x != -1) {
+            copy.push(x);
+        }
+    }
+    while (copy.length < itemBuild.length) {
+        copy.push(-1);
+    }
+    return copy
+}
+
 var aatroxRead = angular.module("aatroxJson", []);
 aatroxRead.controller("aatroxCtrl", function($scope, $http) {
     $http.get("https://ddragon.leagueoflegends.com/cdn/10.9.1/data/en_US/champion/Aatrox.json").then(function(response) {
         $http.get("https://ddragon.leagueoflegends.com/cdn/10.9.1/data/en_US/item.json").then(function(responseItem) {
             $scope.info = response;
-            $scope.myData = response.data.stats;
+            $scope.myData = response.data.data.Aatrox.stats;
+            console.log(response.data.data.Aatrox.stats)
             $scope.itemData = responseItem.data.data;
             $scope.stats = {
                 isMelee: true,
@@ -44,7 +59,6 @@ aatroxRead.controller("aatroxCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -56,7 +70,7 @@ aatroxRead.controller("aatroxCtrl", function($scope, $http) {
             }
 
             $scope.removeItem = function(id) {
-                itemBuild[id] = -1;
+                itemBuild = removeItem(itemBuild, id);
                 $scope.updateStats();
             }
 
@@ -236,7 +250,6 @@ aatroxRead.controller("aatroxCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -288,7 +301,6 @@ ahriRead.controller("ahriCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -480,7 +492,6 @@ ahriRead.controller("ahriCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -532,7 +543,6 @@ akaliRead.controller("akaliCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -724,7 +734,6 @@ akaliRead.controller("akaliCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -776,7 +785,6 @@ alistarRead.controller("alistarCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -968,7 +976,6 @@ alistarRead.controller("alistarCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -1020,7 +1027,6 @@ amumuRead.controller("amumuCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -1212,7 +1218,6 @@ amumuRead.controller("amumuCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -1264,7 +1269,6 @@ aniviaRead.controller("aniviaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -1456,7 +1460,6 @@ aniviaRead.controller("aniviaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -1508,7 +1511,6 @@ annieRead.controller("annieCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -1700,7 +1702,6 @@ annieRead.controller("annieCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -1752,7 +1753,6 @@ asheRead.controller("asheCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -1944,7 +1944,6 @@ asheRead.controller("asheCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -1996,7 +1995,6 @@ aurelionSolRead.controller("aurelionSolCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -2188,7 +2186,6 @@ aurelionSolRead.controller("aurelionSolCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -2240,7 +2237,6 @@ azirRead.controller("azirCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -2432,7 +2428,6 @@ azirRead.controller("azirCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -2484,7 +2479,6 @@ bardRead.controller("bardCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -2676,7 +2670,6 @@ bardRead.controller("bardCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -2728,7 +2721,6 @@ blitzcrankRead.controller("blitzcrankCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -2920,7 +2912,6 @@ blitzcrankRead.controller("blitzcrankCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -2972,7 +2963,6 @@ brandRead.controller("brandCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -3164,7 +3154,6 @@ brandRead.controller("brandCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -3216,7 +3205,6 @@ braumRead.controller("braumCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -3408,7 +3396,6 @@ braumRead.controller("braumCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -3460,7 +3447,6 @@ caitlynRead.controller("caitlynCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -3652,7 +3638,6 @@ caitlynRead.controller("caitlynCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -3704,7 +3689,6 @@ cassiopeiaRead.controller("cassiopeiaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -3896,7 +3880,6 @@ cassiopeiaRead.controller("cassiopeiaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -3948,7 +3931,6 @@ chogathRead.controller("chogathCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -4140,7 +4122,6 @@ chogathRead.controller("chogathCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -4192,7 +4173,6 @@ corkiRead.controller("corkiCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -4384,7 +4364,6 @@ corkiRead.controller("corkiCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -4436,7 +4415,6 @@ dariusRead.controller("dariusCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -4628,7 +4606,6 @@ dariusRead.controller("dariusCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -4680,7 +4657,6 @@ dianaRead.controller("dianaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -4872,7 +4848,6 @@ dianaRead.controller("dianaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -4924,7 +4899,6 @@ drMundoRead.controller("drMundoCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -5116,7 +5090,6 @@ drMundoRead.controller("drMundoCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -5168,7 +5141,6 @@ dravenRead.controller("dravenCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -5360,7 +5332,6 @@ dravenRead.controller("dravenCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -5412,7 +5383,6 @@ ekkoRead.controller("ekkoCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -5604,7 +5574,6 @@ ekkoRead.controller("ekkoCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -5656,7 +5625,6 @@ eliseRead.controller("eliseCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -5848,7 +5816,6 @@ eliseRead.controller("eliseCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -5900,7 +5867,6 @@ evelynnRead.controller("evelynnCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -6092,7 +6058,6 @@ evelynnRead.controller("evelynnCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -6144,7 +6109,6 @@ ezrealRead.controller("ezrealCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -6336,7 +6300,6 @@ ezrealRead.controller("ezrealCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -6388,7 +6351,6 @@ fiddlesticksRead.controller("fiddlesticksCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -6580,7 +6542,6 @@ fiddlesticksRead.controller("fiddlesticksCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -6632,7 +6593,6 @@ fioraRead.controller("fioraCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -6824,7 +6784,6 @@ fioraRead.controller("fioraCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -6876,7 +6835,6 @@ fizzRead.controller("fizzCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -7068,7 +7026,6 @@ fizzRead.controller("fizzCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -7120,7 +7077,6 @@ galioRead.controller("galioCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -7312,7 +7268,6 @@ galioRead.controller("galioCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -7364,7 +7319,6 @@ gangplankRead.controller("gangplankCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -7556,7 +7510,6 @@ gangplankRead.controller("gangplankCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -7608,7 +7561,6 @@ garenRead.controller("garenCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -7800,7 +7752,6 @@ garenRead.controller("garenCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -7852,7 +7803,6 @@ gnarRead.controller("gnarCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -8044,7 +7994,6 @@ gnarRead.controller("gnarCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -8096,7 +8045,6 @@ gragasRead.controller("gragasCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -8288,7 +8236,6 @@ gragasRead.controller("gragasCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -8340,7 +8287,6 @@ gravesRead.controller("gravesCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -8532,7 +8478,6 @@ gravesRead.controller("gravesCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -8584,7 +8529,6 @@ hecarimRead.controller("hecarimCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -8776,7 +8720,6 @@ hecarimRead.controller("hecarimCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -8828,7 +8771,6 @@ heimerdingerRead.controller("heimerdingerCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -9020,7 +8962,6 @@ heimerdingerRead.controller("heimerdingerCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -9072,7 +9013,6 @@ illaoiRead.controller("illaoiCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -9264,7 +9204,6 @@ illaoiRead.controller("illaoiCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -9316,7 +9255,6 @@ ireliaRead.controller("ireliaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -9508,7 +9446,6 @@ ireliaRead.controller("ireliaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -9560,7 +9497,6 @@ ivernRead.controller("ivernCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -9752,7 +9688,6 @@ ivernRead.controller("ivernCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -9804,7 +9739,6 @@ jannaRead.controller("jannaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -9996,7 +9930,6 @@ jannaRead.controller("jannaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -10048,7 +9981,6 @@ jarvanIVRead.controller("jarvanIVCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -10240,7 +10172,6 @@ jarvanIVRead.controller("jarvanIVCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -10292,7 +10223,6 @@ jaxRead.controller("jaxCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -10484,7 +10414,6 @@ jaxRead.controller("jaxCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -10536,7 +10465,6 @@ jayceRead.controller("jayceCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -10728,7 +10656,6 @@ jayceRead.controller("jayceCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -10780,7 +10707,6 @@ jhinRead.controller("jhinCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -10972,7 +10898,6 @@ jhinRead.controller("jhinCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -11024,7 +10949,6 @@ jinxRead.controller("jinxCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -11216,7 +11140,6 @@ jinxRead.controller("jinxCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -11268,7 +11191,6 @@ kalistaRead.controller("kalistaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -11460,7 +11382,6 @@ kalistaRead.controller("kalistaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -11512,7 +11433,6 @@ karmaRead.controller("karmaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -11704,7 +11624,6 @@ karmaRead.controller("karmaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -11756,7 +11675,6 @@ karthusRead.controller("karthusCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -11948,7 +11866,6 @@ karthusRead.controller("karthusCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -12000,7 +11917,6 @@ kassadinRead.controller("kassadinCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -12192,7 +12108,6 @@ kassadinRead.controller("kassadinCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -12244,7 +12159,6 @@ katarinaRead.controller("katarinaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -12436,7 +12350,6 @@ katarinaRead.controller("katarinaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -12488,7 +12401,6 @@ kayleRead.controller("kayleCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -12680,7 +12592,6 @@ kayleRead.controller("kayleCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -12732,7 +12643,6 @@ kennenRead.controller("kennenCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -12924,7 +12834,6 @@ kennenRead.controller("kennenCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -12976,7 +12885,6 @@ khazixRead.controller("khazixCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -13168,7 +13076,6 @@ khazixRead.controller("khazixCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -13220,7 +13127,6 @@ kindredRead.controller("kindredCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -13412,7 +13318,6 @@ kindredRead.controller("kindredCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -13464,7 +13369,6 @@ kledRead.controller("kledCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -13656,7 +13560,6 @@ kledRead.controller("kledCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -13708,7 +13611,6 @@ kogmawRead.controller("kogmawCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -13900,7 +13802,6 @@ kogmawRead.controller("kogmawCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -13952,7 +13853,6 @@ leblancRead.controller("leblancCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -14144,7 +14044,6 @@ leblancRead.controller("leblancCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -14196,7 +14095,6 @@ leeSinRead.controller("leeSinCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -14388,7 +14286,6 @@ leeSinRead.controller("leeSinCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -14440,7 +14337,6 @@ leonaRead.controller("leonaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -14632,7 +14528,6 @@ leonaRead.controller("leonaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -14684,7 +14579,6 @@ lissandraRead.controller("lissandraCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -14876,7 +14770,6 @@ lissandraRead.controller("lissandraCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -14928,7 +14821,6 @@ lucianRead.controller("lucianCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -15120,7 +15012,6 @@ lucianRead.controller("lucianCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -15172,7 +15063,6 @@ luluRead.controller("luluCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -15364,7 +15254,6 @@ luluRead.controller("luluCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -15416,7 +15305,6 @@ luxRead.controller("luxCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -15608,7 +15496,6 @@ luxRead.controller("luxCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -15660,7 +15547,6 @@ malphiteRead.controller("malphiteCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -15852,7 +15738,6 @@ malphiteRead.controller("malphiteCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -15904,7 +15789,6 @@ malzaharRead.controller("malzaharCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -16096,7 +15980,6 @@ malzaharRead.controller("malzaharCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -16148,7 +16031,6 @@ maokaiRead.controller("maokaiCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -16340,7 +16222,6 @@ maokaiRead.controller("maokaiCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -16392,7 +16273,6 @@ masterYiRead.controller("masterYiCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -16584,7 +16464,6 @@ masterYiRead.controller("masterYiCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -16636,7 +16515,6 @@ missFortuneRead.controller("missFortuneCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -16828,7 +16706,6 @@ missFortuneRead.controller("missFortuneCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -16880,7 +16757,6 @@ mordekaiserRead.controller("mordekaiserCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -17072,7 +16948,6 @@ mordekaiserRead.controller("mordekaiserCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -17124,7 +16999,6 @@ morganaRead.controller("morganaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -17316,7 +17190,6 @@ morganaRead.controller("morganaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -17368,7 +17241,6 @@ namiRead.controller("namiCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -17560,7 +17432,6 @@ namiRead.controller("namiCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -17612,7 +17483,6 @@ nasusRead.controller("nasusCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -17804,7 +17674,6 @@ nasusRead.controller("nasusCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -17856,7 +17725,6 @@ nautilusRead.controller("nautilusCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -18048,7 +17916,6 @@ nautilusRead.controller("nautilusCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -18100,7 +17967,6 @@ nidaleeRead.controller("nidaleeCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -18292,7 +18158,6 @@ nidaleeRead.controller("nidaleeCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -18344,7 +18209,6 @@ nocturneRead.controller("nocturneCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -18536,7 +18400,6 @@ nocturneRead.controller("nocturneCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -18588,7 +18451,6 @@ nunuRead.controller("nunuCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -18780,7 +18642,6 @@ nunuRead.controller("nunuCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -18832,7 +18693,6 @@ olafRead.controller("olafCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -19024,7 +18884,6 @@ olafRead.controller("olafCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -19076,7 +18935,6 @@ oriannaRead.controller("oriannaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -19268,7 +19126,6 @@ oriannaRead.controller("oriannaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -19320,7 +19177,6 @@ pantheonRead.controller("pantheonCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -19512,7 +19368,6 @@ pantheonRead.controller("pantheonCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -19564,7 +19419,6 @@ poppyRead.controller("poppyCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -19756,7 +19610,6 @@ poppyRead.controller("poppyCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -19808,7 +19661,6 @@ quinnRead.controller("quinnCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -20000,7 +19852,6 @@ quinnRead.controller("quinnCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -20052,7 +19903,6 @@ rammusRead.controller("rammusCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -20244,7 +20094,6 @@ rammusRead.controller("rammusCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -20296,7 +20145,6 @@ reksaiRead.controller("reksaiCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -20488,7 +20336,6 @@ reksaiRead.controller("reksaiCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -20540,7 +20387,6 @@ renektonRead.controller("renektonCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -20732,7 +20578,6 @@ renektonRead.controller("renektonCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -20784,7 +20629,6 @@ rengarRead.controller("rengarCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -20976,7 +20820,6 @@ rengarRead.controller("rengarCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -21028,7 +20871,6 @@ rivenRead.controller("rivenCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -21220,7 +21062,6 @@ rivenRead.controller("rivenCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -21272,7 +21113,6 @@ rumbleRead.controller("rumbleCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -21464,7 +21304,6 @@ rumbleRead.controller("rumbleCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -21516,7 +21355,6 @@ ryzeRead.controller("ryzeCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -21708,7 +21546,6 @@ ryzeRead.controller("ryzeCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -21760,7 +21597,6 @@ sejuaniRead.controller("sejuaniCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -21952,7 +21788,6 @@ sejuaniRead.controller("sejuaniCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -22004,7 +21839,6 @@ shacoRead.controller("shacoCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -22196,7 +22030,6 @@ shacoRead.controller("shacoCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -22248,7 +22081,6 @@ shenRead.controller("shenCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -22440,7 +22272,6 @@ shenRead.controller("shenCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -22492,7 +22323,6 @@ shyvanaRead.controller("shyvanaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -22684,7 +22514,6 @@ shyvanaRead.controller("shyvanaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -22736,7 +22565,6 @@ singedRead.controller("singedCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -22928,7 +22756,6 @@ singedRead.controller("singedCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -22980,7 +22807,6 @@ sionRead.controller("sionCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -23172,7 +22998,6 @@ sionRead.controller("sionCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -23224,7 +23049,6 @@ sivirRead.controller("sivirCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -23416,7 +23240,6 @@ sivirRead.controller("sivirCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -23468,7 +23291,6 @@ skarnerRead.controller("skarnerCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -23660,7 +23482,6 @@ skarnerRead.controller("skarnerCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -23712,7 +23533,6 @@ sonaRead.controller("sonaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -23904,7 +23724,6 @@ sonaRead.controller("sonaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -23956,7 +23775,6 @@ sorakaRead.controller("sorakaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -24148,7 +23966,6 @@ sorakaRead.controller("sorakaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -24200,7 +24017,6 @@ swainRead.controller("swainCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -24392,7 +24208,6 @@ swainRead.controller("swainCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -24444,7 +24259,6 @@ syndraRead.controller("syndraCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -24636,7 +24450,6 @@ syndraRead.controller("syndraCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -24688,7 +24501,6 @@ tahmkenchRead.controller("tahmkenchCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -24880,7 +24692,6 @@ tahmkenchRead.controller("tahmkenchCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -24932,7 +24743,6 @@ taliyahRead.controller("taliyahCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -25124,7 +24934,6 @@ taliyahRead.controller("taliyahCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -25176,7 +24985,6 @@ talonRead.controller("talonCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -25368,7 +25176,6 @@ talonRead.controller("talonCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -25420,7 +25227,6 @@ taricRead.controller("taricCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -25612,7 +25418,6 @@ taricRead.controller("taricCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -25664,7 +25469,6 @@ teemoRead.controller("teemoCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -25856,7 +25660,6 @@ teemoRead.controller("teemoCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -25908,7 +25711,6 @@ threshRead.controller("threshCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -26100,7 +25902,6 @@ threshRead.controller("threshCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -26152,7 +25953,6 @@ tristanaRead.controller("tristanaCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -26344,7 +26144,6 @@ tristanaRead.controller("tristanaCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -26396,7 +26195,6 @@ trundleRead.controller("trundleCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -26588,7 +26386,6 @@ trundleRead.controller("trundleCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -26640,7 +26437,6 @@ tryndamereRead.controller("tryndamereCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -26832,7 +26628,6 @@ tryndamereRead.controller("tryndamereCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -26884,7 +26679,6 @@ twistedFateRead.controller("twistedFateCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -27076,7 +26870,6 @@ twistedFateRead.controller("twistedFateCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -27128,7 +26921,6 @@ twitchRead.controller("twitchCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -27320,7 +27112,6 @@ twitchRead.controller("twitchCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -27372,7 +27163,6 @@ udyrRead.controller("udyrCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -27564,7 +27354,6 @@ udyrRead.controller("udyrCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -27616,7 +27405,6 @@ urgotRead.controller("urgotCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -27808,7 +27596,6 @@ urgotRead.controller("urgotCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -27860,7 +27647,6 @@ varusRead.controller("varusCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -28052,7 +27838,6 @@ varusRead.controller("varusCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -28104,7 +27889,6 @@ vayneRead.controller("vayneCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -28296,7 +28080,6 @@ vayneRead.controller("vayneCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -28348,7 +28131,6 @@ veigarRead.controller("veigarCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -28540,7 +28322,6 @@ veigarRead.controller("veigarCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -28592,7 +28373,6 @@ velkozRead.controller("velkozCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -28784,7 +28564,6 @@ velkozRead.controller("velkozCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -28836,7 +28615,6 @@ viRead.controller("viCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -29028,7 +28806,6 @@ viRead.controller("viCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -29080,7 +28857,6 @@ viktorRead.controller("viktorCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -29272,7 +29048,6 @@ viktorRead.controller("viktorCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -29324,7 +29099,6 @@ vladimirRead.controller("vladimirCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -29516,7 +29290,6 @@ vladimirRead.controller("vladimirCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -29568,7 +29341,6 @@ volibearRead.controller("volibearCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -29760,7 +29532,6 @@ volibearRead.controller("volibearCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -29812,7 +29583,6 @@ warwickRead.controller("warwickCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -30004,7 +29774,6 @@ warwickRead.controller("warwickCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -30056,7 +29825,6 @@ wukongRead.controller("wukongCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -30248,7 +30016,6 @@ wukongRead.controller("wukongCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -30300,7 +30067,6 @@ xerathRead.controller("xerathCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -30492,7 +30258,6 @@ xerathRead.controller("xerathCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -30544,7 +30309,6 @@ xinZhaoRead.controller("xinZhaoCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -30736,7 +30500,6 @@ xinZhaoRead.controller("xinZhaoCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -30788,7 +30551,6 @@ yasuoRead.controller("yasuoCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -30980,7 +30742,6 @@ yasuoRead.controller("yasuoCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -31032,7 +30793,6 @@ yorickRead.controller("yorickCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -31224,7 +30984,6 @@ yorickRead.controller("yorickCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -31276,7 +31035,6 @@ zacRead.controller("zacCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -31468,7 +31226,6 @@ zacRead.controller("zacCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -31520,7 +31277,6 @@ zedRead.controller("zedCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -31712,7 +31468,6 @@ zedRead.controller("zedCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -31764,7 +31519,6 @@ ziggsRead.controller("ziggsCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -31956,7 +31710,6 @@ ziggsRead.controller("ziggsCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -32008,7 +31761,6 @@ zileanRead.controller("zileanCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -32200,7 +31952,6 @@ zileanRead.controller("zileanCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
@@ -32252,7 +32003,6 @@ zyraRead.controller("zyraCtrl", function($scope, $http) {
 
             $scope.addItem = function(id) {
                 if ($scope.checkItem(id)) {
-                    console.log("addItem() works");
                     for (var i = 0; i < itemBuild.length; i++) {
                         if (itemBuild[i] == -1) {
                             itemBuild[i] = id;
@@ -32444,7 +32194,6 @@ zyraRead.controller("zyraCtrl", function($scope, $http) {
                         }
                     }
                 }
-                console.log(itemBuild);
             }
         });
     });
